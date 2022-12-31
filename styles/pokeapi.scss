@@ -1,0 +1,141 @@
+body {
+  background-color: orangered;
+  background-image: url("/assets/images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  border: 0;
+  height: 100%;
+  width: 100%;
+  font-family: rubik;
+  color: white;
+  box-sizing: border-box;
+}
+
+.container {
+  height: 290px;
+  padding: 0px 0px 0px 0px;
+  margin: 50px 0 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 40px;
+}
+
+.title {
+    width: 100%;
+    height: 125px;
+    background-image: url("/assets/images/pokedex-title.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 20px 0 20px 0;
+
+}
+
+// CARDS
+
+.card {
+    width: 80px;
+    height: 115px;
+    list-style: none;
+    padding: 5px;
+    background-color: #ffffffb7;
+    color: #222;
+    text-align: center;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    object-fit: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+
+    &:hover {
+        transform: scale(1.1);
+        transition: 0.2s;
+        box-shadow: 0 0 15px 10px inset rgb(255, 255, 255);
+    }
+}
+
+.card-title {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 9px;
+    color: #222;
+    font-weight: bold;
+    margin: 0;
+}
+
+.card-subtitle {
+  font-weight: lighter;
+  color: #666;
+  margin-top: 5px;
+}
+
+.card-image {
+    width: 95%;
+  height: 90px;
+  object-fit: contain;
+  padding: 5px;
+}
+
+#pokedex {
+    width: 90%;
+    margin: 0 0 0 0;
+    padding: 10px 20px 0px 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    overflow: auto;
+    
+}
+
+
+// @keyframes bounce {
+//   20% {
+//     transform: translateY(-6px);
+//   }
+//   40% {
+//     transform: translateY(0px);
+//   }
+//   60% {
+//     transform: translateY(-2px);
+//   }
+//   80% {
+//     transform: translateY(-0px);
+//   }
+// }
+
+
+// SCROLLBAR - CUSTOM
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f19a; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.568); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(252, 235, 1, 0.822); 
+  }
