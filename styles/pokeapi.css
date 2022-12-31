@@ -87,7 +87,7 @@ h1 {
   height: 115px;
   list-style: none;
   padding: 5px;
-  background-color: rgba(255, 255, 255, 0.7176470588);
+  background-color: rgba(255, 255, 255, 0.5803921569);
   color: #222;
   text-align: center;
   border: 2px solid rgba(0, 0, 0, 0.5);
@@ -98,12 +98,8 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: 0.2s;
-}
-.card:hover {
-  transform: scale(1.1);
-  transition: 0.2s;
-  box-shadow: 0 0 15px 10px inset rgb(255, 255, 255);
+  position: relative;
+  cursor: url("https://img.icons8.com/color/48/null/open-pokeball--v2.png"), pointer;
 }
 
 .card-title {
@@ -127,6 +123,11 @@ h1 {
   -o-object-fit: contain;
      object-fit: contain;
   padding: 5px;
+  transition: 0.2s;
+}
+.card-image:hover {
+  transform: scale(1.5);
+  transition: 0.2s;
 }
 
 #pokedex {
@@ -185,23 +186,23 @@ h1 {
 }
 
 .fire {
-  box-shadow: 0 0 40px 10px inset rgba(255, 0, 0, 0.445);
+  box-shadow: 0 0 40px 10px inset rgba(252, 18, 18, 0.753);
 }
 
 .water {
-  box-shadow: 0 0 40px 10px inset rgba(0, 119, 255, 0.445);
+  box-shadow: 0 0 40px 10px inset rgba(29, 135, 255, 0.712);
 }
 
 .bug {
-  box-shadow: 0 0 40px 10px inset rgba(195, 250, 106, 0.692);
+  box-shadow: 0 0 40px 10px inset rgba(191, 253, 92, 0.925);
 }
 
 .normal {
-  box-shadow: 0 0 40px 10px inset rgba(255, 255, 255, 0.685);
+  box-shadow: 0 0 40px 10px inset rgba(255, 255, 255, 0.61);
 }
 
 .poison {
-  box-shadow: 0 0 40px 10px inset rgba(197, 16, 233, 0.466);
+  box-shadow: 0 0 40px 10px inset rgba(215, 17, 255, 0.705);
 }
 
 .electric {
@@ -217,15 +218,15 @@ h1 {
 }
 
 .fairy {
-  box-shadow: 0 0 40px 10px inset rgba(250, 164, 236, 0.808);
+  box-shadow: 0 0 40px 10px inset rgb(252, 154, 235);
 }
 
 .psychic {
-  box-shadow: 0 0 40px 10px inset rgba(132, 0, 255, 0.664);
+  box-shadow: 0 0 40px 10px inset rgba(127, 2, 245, 0.884);
 }
 
 .rock {
-  box-shadow: 0 0 40px 10px inset rgba(82, 82, 82, 0.336);
+  box-shadow: 0 0 40px 10px inset rgba(5, 5, 5, 0.418);
 }
 
 .ice {
@@ -234,4 +235,32 @@ h1 {
 
 .dragon {
   box-shadow: 0 0 40px 10px inset rgba(255, 0, 98, 0.808);
+}
+
+.legendary {
+  border: 2px outset rgb(255, 214, 80);
+}
+
+.flying {
+  width: 20px;
+  height: 20px;
+  background-image: url("/assets/icons/Flying type.ico");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 90%;
+  left: 40%;
+}
+
+.ghost {
+  width: 20px;
+  height: 20px;
+  background-image: url("/assets/icons/Ghost type.ico");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 90%;
+  left: 40%;
 }/*# sourceMappingURL=pokeapi.css.map */
