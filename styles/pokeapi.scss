@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: rgba(179, 233, 255, 0.63);
+  background-color: rgb(65, 65, 65);
   margin: 0;
   border: 0;
   padding-top: 25%;
@@ -88,14 +88,14 @@ main {
 // CARDS
 
 .card {
-    width: 80px;
-    height: 115px;
+    width: 100px;
+    height: 100px;
     list-style: none;
     padding: 5px;
     background-color: #ffffff94;
     color: #222;
     text-align: center;
-    border: 2px solid rgba(0, 0, 0, 0.5);
+    // border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     object-fit: contain;
     display: flex;
@@ -110,9 +110,10 @@ main {
     width: 100%;
     text-transform: uppercase;
     font-size: 9px;
-    color: #222;
+    color: rgb(255, 255, 255);
     font-weight: bold;
     margin: 0;
+    padding-top: 5px;
 }
 
 .card-subtitle {
@@ -148,22 +149,6 @@ main {
     animation: fadeIn 7s; 
 }
 
-
-// @keyframes bounce {
-//   20% {
-//     transform: translateY(-6px);
-//   }
-//   40% {
-//     transform: translateY(0px);
-//   }
-//   60% {
-//     transform: translateY(-2px);
-//   }
-//   80% {
-//     transform: translateY(-0px);
-//   }
-// }
-
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -184,22 +169,22 @@ main {
 
 // POKEMON CLASSES
 
-.grass {box-shadow: 0 0 40px 10px inset rgba(29, 204, 23, 0.712);}
-.fire {box-shadow: 0 0 40px 10px inset rgba(252, 18, 18, 0.753);}
-.water {box-shadow: 0 0 40px 10px inset rgba(29, 135, 255, 0.712);}
-.bug {box-shadow: 0 0 40px 10px inset rgba(191, 253, 92, 0.925);}
-.normal {box-shadow: 0 0 40px 10px inset rgba(255, 255, 255, 0.61);}
-.poison {box-shadow: 0 0 40px 10px inset rgba(215, 17, 255, 0.705);}
-.electric {box-shadow: 0 0 40px 10px inset rgba(251, 255, 5, 0.795);}
-.ground {box-shadow: 0 0 40px 10px inset rgba(99, 38, 10, 0.651);}
-.fighting {box-shadow: 0 0 40px 10px inset rgba(255, 86, 8, 0.685);}
-.fairy {box-shadow: 0 0 40px 10px inset rgb(252, 154, 235);}
-.psychic {box-shadow: 0 0 40px 10px inset rgba(127, 2, 245, 0.884);}
-.rock {box-shadow: 0 0 40px 10px inset rgba(5, 5, 5, 0.418);}
-.ice {box-shadow: 0 0 40px 10px inset rgba(0, 225, 255, 0.822);}
-.dragon {box-shadow: 0 0 40px 10px inset rgba(255, 0, 98, 0.808);}
+.grass {background-color: rgb(102, 155, 100);}
+.fire {background-color: rgba(255, 103, 103, 0.747);}
+.water {background-color: rgb(116, 165, 221);}
+.bug {background-color: rgb(123, 167, 118);}
+.normal {background-color: rgb(172, 172, 172);}
+.poison {background-color: rgba(229, 99, 255, 0.74);}
+.electric {background-color: rgb(255, 234, 116);}
+.ground {background-color: rgba(163, 90, 56, 0.781);}
+.fighting {background-color: rgba(253, 140, 64, 0.795);}
+.fairy {background-color: rgba(255, 197, 245, 0.842);}
+.psychic {background-color: rgba(155, 48, 255, 0.733);}
+.rock {background-color: rgba(105, 105, 105, 0.801);}
+.ice {background-color: rgba(109, 238, 255, 0.733);}
+.dragon {background-color: rgba(255, 81, 148, 0.774);}
 
-.legendary {border: 2px outset rgb(255, 214, 80)}
+.legendary {box-shadow: 0 0 25px 10px inset rgb(255, 166, 0)}
 
 .flying {
     width: 20px;
@@ -238,29 +223,165 @@ main {
   left: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   z-index: 1000;
   opacity: 1;
   transition: 0.5s;
+}
 
-  &__container{
-    padding: 5%;
+
+// PARTE INFERIOR DE LA CARTA
+.cardBottom{
+    width: 80%;
+    max-height: 50vh;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon {
+
+  &--name {
+    width: 100%;
+    font-size: 36px;
+    padding: 20px 0 40px 0;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--Types {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    &--type{
+      width: 60px;
+      height: 20px;
+      text-align: center;
+    }
+  }
+
+  &--BaseStats {
+    width: 80%;
+    font-size: 16px;
+    text-align: center;
+    margin: 10px 0 10px 0;
+  }
+
+  &--HP {
+    width: 80%;
+    height: 18px;
+    font-size: 12px;
+    text-transform: uppercase;
+    background-color: red;
+    padding-left: 10px;
+    padding-top: 3px;
+    text-align: left;
+    border-radius: 50px;
+    margin: 10px 0 10px 0;
+  }
+
+  &--Attack {
+    width: 80%;
+    height: 18px;
+    font-size: 12px;
+    text-transform: uppercase;
+    background-color: rgb(255, 187, 0);
+    padding-left: 10px;
+    padding-top: 3px;
+    text-align: left;
+    border-radius: 50px;
+    margin: 10px 0 10px 0;
+  }
+
+  &--Defense {
+    width: 80%;
+    height: 18px;
+    font-size: 12px;
+    text-transform: uppercase;
+    background-color: rgb(0, 110, 255);
+    padding-left: 10px;
+    padding-top: 3px;
+    text-align: left;
+    border-radius: 50px;
+    margin: 10px 0 10px 0;
+  }
+
+  &--Speed {
+    width: 80%;
+    height: 18px;
+    font-size: 12px;
+    text-transform: uppercase;
+    background-color: rgb(119, 119, 119);
+    padding-left: 10px;
+    padding-top: 3px;
+    text-align: left;
+    border-radius: 50px;
+    margin: 10px 0 10px 0;
+  }
+
+  &--Exp {
+    width: 80%;
+    height: 18px;
+    font-size: 12px;
+    text-transform: uppercase;
+    background-color: rgb(49, 151, 46);
+    padding-left: 10px;
+    padding-top: 3px;
+    text-align: left;
+    border-radius: 50px;
+    margin: 10px 0 10px 0;
   }
 }
 
-.hide {
-  opacity: 0;
-  z-index: -1000;
-}
 
-.closeButton {
+// PARTE SUPERIOR DE LA CARTA
+.card {
+  
+  &--Top {
   width: 100%;
-  height: 50vh;
-  background-color: rgb(0, 140, 255);
+  height: 45vh;
   cursor: pointer;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  padding-top: 3%;
   border-bottom-left-radius: 20%;
   border-bottom-right-radius: 20%;
-  
+  }
+
+  &--Exit{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  // &--Separator{
+  //   width: 90%;
+  //   margin-top: 10px;
+  //   border: 0;
+  //   height: 3px;
+  //   background-image: linear-gradient(to right, transparent, #CCC, transparent);  
+  // }
+
+  &--Img{
+    width: 80%;
+    max-width: 400px;
+    height: 35vh;
+    margin-top: 5%;
+    object-fit: contain;
+  }
+
 }
