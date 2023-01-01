@@ -1,10 +1,12 @@
+//! creamos la lista con los pokemosn legendarios desde el 1 hasta el 931
+    const legendary = ["zapdos", "articuno", "moltres", "mewtwo", "mew", "raikou", "entei", "suicune", "lugia", "ho-oh", "regirock", "regice", "registeel", "latios", "latias", "kyogre", "groudon", "rayquaza", "rotom", "uxie", "mesprit", "azelf", "palkia", "dialga", "giratina-altered", "jirachi", "deoxys-normal", "cresselia", "darkrai", "arceus", "heatran", "regigigas", "cobalion", "terrakion", "virizion", "tornadus-incarnate", "thundurus-incarnate", "reshiram", "zekrom", "landorus-incarnate", "keldeo", "meloetta-aria", "kyurem", "xerneas", "yveltal", "zygarde-50", "diancie", "hoopa", "volcanion", "type-null", "silvally", "tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini", "cosmog", "cosmoem", "solgaleo", "lunala", "necrozma", "zacian", "zamazenta", "eternatus", "kubfu", "urshifu-single-strike", "enamorus-incarnate", "regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "giratina-origin", "thundurus-therian", "landorus-therian", "tornadus-therian", "kyurem-black", "kyurem-white"];
 
 //! primero de todo hacemos el FETCH para solicitar la información a la POKEAPI
 async function getPokemons() {
 
     // hacemos el primer fetch para obtener la lista de los 151 pokemons
     async function allPokemons() {
-        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=176')
+        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=931')
         .then(res => res.json());
     }
     const fetchResult  = await allPokemons();
@@ -25,7 +27,7 @@ async function getPokemons() {
     }        
 };
 
-// función para crear las cartas y meterlas en el HTML dinámicamente
+//! función para crear las cartas y meterlas en el HTML dinámicamente
 function renderPokemons(pokemon) {
 
     const list$$ = document.querySelector("#pokedex")
@@ -45,11 +47,9 @@ function renderPokemons(pokemon) {
     card$$.appendChild(name$$);
     card$$.appendChild(image$$);
 
-
     card$$.addEventListener("click", getStats);
 
-
-    // damos estilos según el tipo de pokemon
+    // damos estilos a las cartas según el tipo de pokemon
     for (let i = 0; i < pokemon.types.length; i++){
         if (pokemon.types[i].type.name === "grass"){card$$.classList.add("grass");}
         if (pokemon.types[i].type.name === "fire"){card$$.classList.add("fire");}
@@ -80,7 +80,6 @@ function renderPokemons(pokemon) {
     }
 
     // damos estilo diferenciado a los pokemons legendarios
-    const legendary = ["zapdos", "articuno", "moltres", "mewtwo", "mew"];
     for ( let i = 0; i < legendary.length; i++){
         if (legendary[i] === pokemon.name){
             card$$.classList.add("legendary");
@@ -89,7 +88,7 @@ function renderPokemons(pokemon) {
     }
 }
 
-// hacemos FETCH al pokemon clikeado para saber sus estadísticas
+//! hacemos FETCH al pokemon clikeado para saber sus estadísticas
 async function getStats (event){
     async function getPokemonStats(event) {
         return fetch("https://pokeapi.co/api/v2/pokemon/"+ event.path[1].id)
@@ -99,10 +98,10 @@ async function getStats (event){
     renderPokemonStats (pokemonStats);
 };
 
-// creamos una vista con estadísticas para el pokemon que le hacemos click
+//! creamos una vista con estadísticas para el pokemon que le hacemos click
 function renderPokemonStats(pokemon){
-
     console.log(pokemon)
+
     // carta global
     const bigCard$$ = document.createElement("div");
         bigCard$$.setAttribute("class","fullCard");
@@ -120,6 +119,7 @@ function renderPokemonStats(pokemon){
             const cardType = document.createElement("p");
             cardType.setAttribute("class", "pokemon--Types--type")
             cardType.textContent = pokemon.types[i].type.name;
+            cardTypes$$.appendChild(cardType);
 
             if (pokemon.types[i].type.name === "grass"){cardType.classList.add("grass");}
             if (pokemon.types[i].type.name === "fire"){cardType.classList.add("fire");}
@@ -135,42 +135,60 @@ function renderPokemonStats(pokemon){
             if (pokemon.types[i].type.name === "rock"){cardType.classList.add("rock");}
             if (pokemon.types[i].type.name === "ice"){cardType.classList.add("ice");}
             if (pokemon.types[i].type.name === "dragon"){cardType.classList.add("dragon");}
+            if (pokemon.types[i].type.name === "flying"){cardType.classList.add("flying2");}
+            if (pokemon.types[i].type.name === "ghost"){cardType.classList.add("ghost2");}
 
-            cardTypes$$.appendChild(cardType);
         }
 
-        cardTypes$$.textContent = pokemon.name;
     const cardBaseStats$$ = document.createElement("h2");
         cardBaseStats$$.setAttribute("class","pokemon--BaseStats");
         cardBaseStats$$.textContent = "Base Stats";
         
         //barras de estadísticas
+        const maxHP = 150;
+        const maxEXP = 300;
         const cardHP$$ = document.createElement("p");
         cardHP$$.setAttribute("class","pokemon--HP");
-        cardHP$$.textContent = pokemon.stats[0].stat.name + " - " + pokemon.stats[0].base_stat;
+        cardHP$$.setAttribute("style","width:"+ (pokemon.stats[0].base_stat*100/maxHP)+"%");
+        cardHP$$.textContent = "HP - " + pokemon.stats[0].base_stat + " / " + maxHP;
+        const cardBar0$$ = document.createElement("div");
+        cardBar0$$.setAttribute("class","pokemon--bar");
         
         const cardAttack$$ = document.createElement("p");
         cardAttack$$.setAttribute("class","pokemon--Attack");
-        cardAttack$$.textContent = pokemon.stats[1].stat.name + " - " + pokemon.stats[1].base_stat;
+        cardAttack$$.setAttribute("style","width:"+ (pokemon.stats[1].base_stat*100/maxHP)+"%");
+        cardAttack$$.textContent = "ATK - " + pokemon.stats[1].base_stat + " / " + maxHP;
+        const cardBar1$$ = document.createElement("div");
+        cardBar1$$.setAttribute("class","pokemon--bar");
 
         const cardDefense$$ = document.createElement("p");
         cardDefense$$.setAttribute("class","pokemon--Defense");
-        cardDefense$$.textContent = pokemon.stats[2].stat.name + " - " + pokemon.stats[2].base_stat;
+        cardDefense$$.setAttribute("style","width:"+ (pokemon.stats[2].base_stat*100/maxHP)+"%");
+        cardDefense$$.textContent = "DEF - " + pokemon.stats[2].base_stat + " / " + maxHP;
+        const cardBar2$$ = document.createElement("div");
+        cardBar2$$.setAttribute("class","pokemon--bar");
 
         const cardSpeed$$ = document.createElement("p");
         cardSpeed$$.setAttribute("class","pokemon--Speed");
-        cardSpeed$$.textContent = pokemon.stats[5].stat.name + " - " + pokemon.stats[5].base_stat;
+        cardSpeed$$.setAttribute("style","width:"+ (pokemon.stats[5].base_stat*100/maxHP)+"%");
+        cardSpeed$$.textContent = "SPD - " + pokemon.stats[5].base_stat + " / " + maxHP;
+        const cardBar3$$ = document.createElement("div");
+        cardBar3$$.setAttribute("class","pokemon--bar");
 
         const cardExp$$ = document.createElement("p");
         cardExp$$.setAttribute("class","pokemon--Exp");
-        cardExp$$.textContent = "EXP - " + pokemon.base_experience;
+        cardExp$$.setAttribute("style","width:"+ (pokemon.base_experience*100/maxEXP)+"%");
+        cardExp$$.textContent = "EXP - " + pokemon.base_experience + " / " + maxEXP;
+        const cardBar4$$ = document.createElement("div");
+        cardBar4$$.setAttribute("class","pokemon--bar");
 
 
 
     // parte superior de la carta    
     const cardTop$$ = document.createElement("div");
         cardTop$$.setAttribute("class","card--Top");
-            // damos estilos según el tipo de pokemon
+    
+    // damos estilos según el tipo de pokemon
     for (let i = 0; i < pokemon.types.length; i++){
         if (pokemon.types[i].type.name === "grass"){cardTop$$.classList.add("grass");}
         if (pokemon.types[i].type.name === "fire"){cardTop$$.classList.add("fire");}
@@ -188,7 +206,6 @@ function renderPokemonStats(pokemon){
         if (pokemon.types[i].type.name === "dragon"){cardTop$$.classList.add("dragon");}
     }
 
-    const legendary = ["zapdos", "articuno", "moltres", "mewtwo", "mew"];
     for ( let i = 0; i < legendary.length; i++){
         if (legendary[i] === pokemon.name){
             cardTop$$.classList.add("legendary");
@@ -224,23 +241,25 @@ function renderPokemonStats(pokemon){
             cardBottom$$.appendChild(cardName$$);
                 cardName$$.appendChild(cardTypes$$);
             cardBottom$$.appendChild(cardBaseStats$$);
-            cardBottom$$.appendChild(cardHP$$);
-            cardBottom$$.appendChild(cardAttack$$);
-            cardBottom$$.appendChild(cardDefense$$);
-            cardBottom$$.appendChild(cardSpeed$$);
-            cardBottom$$.appendChild(cardExp$$);
+                cardBaseStats$$.appendChild(cardBar0$$);
+                    cardBar0$$.appendChild(cardHP$$);
+                cardBaseStats$$.appendChild(cardBar1$$);
+                    cardBar1$$.appendChild(cardAttack$$);
+                cardBaseStats$$.appendChild(cardBar2$$);
+                    cardBar2$$.appendChild(cardDefense$$);
+                cardBaseStats$$.appendChild(cardBar3$$);
+                    cardBar3$$.appendChild(cardSpeed$$);
+                cardBaseStats$$.appendChild(cardBar4$$);
+                    cardBar4$$.appendChild(cardExp$$);
     
-
-
     cardPokedex$$.addEventListener("click",removeCard);
 }
 
+
 // creamos la función que cierra la ventana de estadísticas del pokemon
 function removeCard(event) {
-    console.log(event)
     const removeCard = event.path[3];
     removeCard.remove();
-
 }
 
 
