@@ -144,7 +144,7 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    overflow: auto;
+    overflow: scroll;
     animation: fadeIn 7s; 
 }
 
@@ -167,29 +167,18 @@ main {
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
-  }  
+}  
 
 
 // SCROLLBAR - CUSTOM
 
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f19a; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgba(136, 136, 136, 0.568); 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(252, 235, 1, 0.822); 
-  }
+::-webkit-scrollbar {width: 3px;}
+/* Track */
+::-webkit-scrollbar-track {background: #f1f1f19a;}
+/* Handle */
+::-webkit-scrollbar-thumb {background: rgba(136, 136, 136, 0.568);}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {background: rgba(252, 235, 1, 0.822);}
 
 
 
@@ -236,3 +225,42 @@ main {
     left: 40%;
 }
 
+
+// POKEMON STATS CARD ON CLICK
+
+.fullCard {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(54, 54, 54);
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  opacity: 1;
+  transition: 0.5s;
+
+  &__container{
+    padding: 5%;
+  }
+}
+
+.hide {
+  opacity: 0;
+  z-index: -1000;
+}
+
+.closeButton {
+  width: 100%;
+  height: 50vh;
+  background-color: rgb(0, 140, 255);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  
+}

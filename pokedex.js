@@ -8,7 +8,7 @@ async function getPokemons() {
         .then(res => res.json());
     }
     const fetchResult  = await allPokemons();
-    console.log(fetchResult);
+    // console.log(fetchResult);
 
     // usamos un FOR para mapear cada pokemon individualmente
     for (let i = 0; i < fetchResult.results.length; i++){
@@ -18,7 +18,7 @@ async function getPokemons() {
         }
        
         const fetchPokemon  = await onePokemon();
-        console.log(fetchPokemon);
+        // console.log(fetchPokemon);
 
         // llamamos a la función para crear la carta individual de cada pokemon
         renderPokemons(fetchPokemon);
@@ -45,7 +45,9 @@ function renderPokemons(pokemon) {
     card$$.appendChild(name$$);
     card$$.appendChild(image$$);
 
-    card$$.addEventListener("input", showStats(event));
+
+    card$$.addEventListener("click", getStats);
+
 
     // damos estilos según el tipo de pokemon
     for (let i = 0; i < pokemon.types.length; i++){
@@ -87,20 +89,50 @@ function renderPokemons(pokemon) {
     }
 }
 
-function showStats (event){
+async function getStats (event){
 
-    console.log("HOLA")
+    async function getPokemonStats(event) {
+        
+        return fetch("https://pokeapi.co/api/v2/pokemon/"+ event.path[1].id)
+        .then(res => res.json());
+        }
+ 
+    const pokemonStats = await getPokemonStats(event);
+    renderPokemonStats (pokemonStats);
 
-    // for (let i = 0; i < 
-    // const bigCard$$ = document.createElement("div");
+};
 
+function renderPokemonStats(pokemon){
 
+    console.log(pokemon)
+    const bigCard$$ = document.createElement("div");
+        bigCard$$.setAttribute("class","fullCard");
 
-    // document.body.appendChild(bigCard$$)
+    const cardContainer$$ = document.createElement("div");
+        cardContainer$$.setAttribute("class","fullCard__container");    
+        cardContainer$$.textContent = pokemon.name;
+
+    const cardClose$$ = document.createElement("div");
+        cardClose$$.setAttribute("class","closeButton");
+        cardClose$$.textContent = "X";
+    
+    
+    document.body.appendChild(bigCard$$);
+    bigCard$$.appendChild(cardClose$$);
+    bigCard$$.appendChild(cardContainer$$);
+    
+    cardClose$$.addEventListener("click",removeCard);
 
 }
 
+function removeCard(event) {
+    // window.removeEventListener("click", showStats);
+    // console.log(event)
+    const removeCard = event.path[1];
+    // removeCard.remove();
+    removeCard.remove();
 
+}
 
 
 window.onload = getPokemons();
