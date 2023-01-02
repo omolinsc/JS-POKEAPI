@@ -101,7 +101,7 @@ async function getStats (event){
 
 //! creamos una vista con estadísticas para el pokemon que le hacemos click
 function renderPokemonStats(pokemon){
-    console.log(pokemon)
+    // console.log(pokemon)
 
     // carta global
     const bigCard$$ = document.createElement("div");
@@ -140,6 +140,9 @@ function renderPokemonStats(pokemon){
             if (pokemon.types[i].type.name === "ghost"){cardType.classList.add("ghost2");}
 
         }
+
+    const cardSeparator$$ = document.createElement("hr");
+        cardSeparator$$.setAttribute("class","card--Separator"); 
 
     const cardBaseStats$$ = document.createElement("h2");
         cardBaseStats$$.setAttribute("class","pokemon--BaseStats");
@@ -222,8 +225,6 @@ function renderPokemonStats(pokemon){
     const cardID$$ = document.createElement("p");
         cardID$$.setAttribute("class","card--ID"); 
         cardID$$.textContent = "ID núm: " + pokemon.id;
-    // const cardSeparator$$ = document.createElement("hr");
-    //     cardSeparator$$.setAttribute("class","card--Separator"); 
     const cardImg$$ = document.createElement("img");
         cardImg$$.setAttribute("class","card--Img");
         cardImg$$.src = pokemon.sprites.other["official-artwork"].front_default;
@@ -235,12 +236,12 @@ function renderPokemonStats(pokemon){
             cardTop$$.appendChild(cardExit$$);
                 cardExit$$.appendChild(cardPokedex$$);
                 cardExit$$.appendChild(cardID$$);
-            // cardTop$$.appendChild(cardSeparator$$);
             cardTop$$.appendChild(cardImg$$);
             
         bigCard$$.appendChild(cardBottom$$);
             cardBottom$$.appendChild(cardName$$);
                 cardName$$.appendChild(cardTypes$$);
+                cardName$$.appendChild(cardSeparator$$)
             cardBottom$$.appendChild(cardBaseStats$$);
                 cardBaseStats$$.appendChild(cardBar0$$);
                     cardBar0$$.appendChild(cardHP$$);
