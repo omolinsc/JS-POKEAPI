@@ -6,7 +6,7 @@ async function getPokemons() {
 
     // hacemos el primer fetch para obtener la lista de los 151 pokemons
     async function allPokemons() {
-        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=176')
+        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=931')
         .then(res => res.json());
     }
     const fetchResult  = await allPokemons();
@@ -65,6 +65,7 @@ function renderPokemons(pokemon) {
         if (pokemon.types[i].type.name === "rock"){card$$.classList.add("rock");}
         if (pokemon.types[i].type.name === "ice"){card$$.classList.add("ice");}
         if (pokemon.types[i].type.name === "dragon"){card$$.classList.add("dragon");}
+        if (pokemon.types[i].type.name === "steel"){card$$.classList.add("steel");}
 
         if (pokemon.types[i].type.name === "flying"){
             const type$$ = document.createElement("div");
