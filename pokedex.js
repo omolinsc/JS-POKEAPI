@@ -6,7 +6,7 @@ async function getPokemons() {
 
     // hacemos el primer fetch para obtener la lista de los 151 pokemons
     async function allPokemons() {
-        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=931')
+        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=176')
         .then(res => res.json());
     }
     const fetchResult  = await allPokemons();
@@ -40,7 +40,7 @@ function renderPokemons(pokemon) {
     const name$$ = document.createElement("h3");
         name$$.setAttribute("class","card-title");
 
-    name$$.textContent = pokemon.id + " - " + pokemon.forms[0].name;
+    name$$.textContent = pokemon.forms[0].name + " - ID: " + pokemon.id;
     image$$.src = pokemon.sprites.other["official-artwork"].front_default;
 
     list$$.appendChild(card$$);
@@ -68,13 +68,15 @@ function renderPokemons(pokemon) {
 
         if (pokemon.types[i].type.name === "flying"){
             const type$$ = document.createElement("div");
-            type$$.setAttribute("class","flying");
+            type$$.setAttribute("class","flyingcard");
+            card$$.classList.add("class","flying");
             card$$.appendChild(type$$);
         }
 
         if (pokemon.types[i].type.name === "ghost"){
             const type$$ = document.createElement("div");
-            type$$.setAttribute("class","ghost");
+            type$$.setAttribute("class","ghostcard");
+            card$$.classList.add("class","ghost");
             card$$.appendChild(type$$);
         }
     }
@@ -83,7 +85,6 @@ function renderPokemons(pokemon) {
     for ( let i = 0; i < legendary.length; i++){
         if (legendary[i] === pokemon.name){
             card$$.classList.add("legendary");
-            card$$.setAttribute("isLegendary","true");
         }
     }
 }
@@ -262,5 +263,29 @@ function removeCard(event) {
     removeCard.remove();
 }
 
+// buscador con filter
+function filter() {
+    let input, filter, ol, li, pokemon, i, txtValue, classValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    ol = document.getElementById("pokedex");
+    li = ol.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        pokemon = li[i];
+        txtValue = pokemon.textContent || pokemon.innerText;
+        classValue = pokemon.className;
+
+        // filtro por nombre
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        
+        // filtro por class
+        } else if (classValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
 
 window.onload = getPokemons();
