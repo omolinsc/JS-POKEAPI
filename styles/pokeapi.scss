@@ -207,11 +207,11 @@ main {
 
 // SCROLLBAR - CUSTOM
 
-::-webkit-scrollbar {width: 3px;}
+::-webkit-scrollbar {width: 0px;}
 /* Track */
-::-webkit-scrollbar-track {background: #f1f1f19a;}
+::-webkit-scrollbar-track {background: #f1f1f100;}
 /* Handle */
-::-webkit-scrollbar-thumb {background: rgba(136, 136, 136, 0.568);}
+::-webkit-scrollbar-thumb {background: rgba(136, 136, 136, 0);}
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {background: rgba(252, 235, 1, 0.822);}
 
