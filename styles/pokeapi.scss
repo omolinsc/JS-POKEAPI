@@ -432,9 +432,9 @@ main {
 }
 
 .game {
-  width: 70px;
+  width: 80px;
   height: 70px;
-  background-image: url("/assets/images/menu-icon.png");
+  background-image: url("/assets/images/detectivePikachu.png");
   background-repeat: no-repeat;
   background-size: cover;
   font-size: 10px;
@@ -443,12 +443,15 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 30px;
+  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.705);
 }
 
-.gameLight {
-  box-shadow: 0 0 10px 10px inset rgba(255, 255, 52, 0.616);
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
+
 
 
 

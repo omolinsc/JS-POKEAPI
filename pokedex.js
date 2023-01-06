@@ -290,11 +290,4 @@ function filter() {
     }
 }
 
-// setInterval(() => {
-//     document.querySelector(".game").classList.remove("gameLight");
-//     setInterval(() => {
-//         document.querySelector(".game").classList.add("gameLight");
-//     }, interval);
-// }, 400);
-
 window.onload = getPokemons();

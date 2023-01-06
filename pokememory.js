@@ -1,47 +1,78 @@
 
+let pokemonsToFetch = 900;
 let memoryCards = 16;
 let fetchCards = memoryCards/2;
 let pairsMatched = 0;
 
-//! primero de todo hacemos el FETCH para solicitar la información a la POKEAPI
-async function getPokemons() {
+let arrayNumbers = [];
+let arraySelectedNumbers = [];
 
-    // hacemos el primer fetch para obtener la lista de los pokemons
-    async function allPokemons() {
-        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit='+fetchCards)
-        .then(res => res.json());
+//!Fisher Yates Method
+function myFunction(array) {
+    for (let i = array.length -1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i+1));
+      let k = array[i];
+      array[i] = array[j];
+      array[j] = k;
     }
-    const fetchResult  = await allPokemons();
+}
 
-    // usamos un FOR para mapear cada pokemon individualmente
-    for (let i = 0; i < fetchResult.results.length; i++){
-        async function onePokemon() {
-            return fetch(fetchResult.results[i].url)
-            .then(res => res.json());
-        }
-       
-        const fetchPokemon  = await onePokemon();
-        // console.log(fetchPokemon);
+//creamos un array con tantos números como pokemons queremos (en nuestro caso 931)
+for ( let i = 1; i < pokemonsToFetch; i++){
+    arrayNumbers.push(i);
+}
 
-        // llamamos a la función para crear la carta individual de cada pokemon
-        memoryPokemons(fetchPokemon);
-        memoryPokemons(fetchPokemon);
-    }        
+//desordenamos de forma aleatoria ese array
+myFunction(arrayNumbers);
+
+//generamos otro array con 16 pokemons, leemos los 8 primeros y los volvemos a leer para así tener de forma segura una pareja de cada pokemon
+let j = 0;
+let k = 0;
+
+for (let i = 0; i < memoryCards; i++){
+    if ( i < memoryCards/2){ 
+        arraySelectedNumbers[i] = arrayNumbers[j];
+        j++;
+    } else {
+        arraySelectedNumbers[i] = arrayNumbers[k];
+        k++;
+    }
 };
 
-let i = 0;
+//desordenamos el array de nuevo con las parejas
+myFunction(arraySelectedNumbers);
+
+
+//! hacemos el FETCH para solicitar la información a la POKEAPI de cada pokemon que contiene nuestro array
+async function getPokemons() {
+
+    // hacemos fetch de cada pokemon que queremos
+    for (let i = 0; i < arraySelectedNumbers.length; i++){
+
+        async function allPokemons() {
+            return fetch('https://pokeapi.co/api/v2/pokemon/' + arraySelectedNumbers[i])
+            .then(res => res.json());
+        }
+        const fetchResult  = await allPokemons();
+
+        // llamamos a la función para crear la carta individual de cada pokemon
+        memoryPokemons(fetchResult);
+    }
+}
+
+
+
+let id = 0;
 
 //hacemos visibles las cartas de pokemon
 function memoryPokemons(event){
-
-    const image = event.sprites.other["official-artwork"].front_default;
     
     //creamos los elementos y les damos estilo
     const scene$$ = document.createElement("div");
         scene$$.setAttribute("class","box__container--scene");
-        scene$$.setAttribute("id",i);
+        scene$$.setAttribute("id",id);
         scene$$.setAttribute("alt",event.name);
-        i++;
+        id++;
     const card$$ = document.createElement("div");
         card$$.setAttribute("class","box__container--card");
     const cardFront$$ = document.createElement("div");
@@ -93,7 +124,12 @@ function flip(event) {
                 
                 setTimeout(() => {
                     if( pairsMatched === fetchCards){
-                        document.querySelector(".box__container").setAttribute("style","display:none");
+                        setTimeout(() => {
+                            document.querySelector(".box__container").classList.add("fadeOut");
+                            document.querySelector(".box__container").classList.add("hide");
+                            document.querySelector(".ash").classList.remove("hide");
+                            document.querySelector(".ash").classList.add("fadeIn");
+                        }, 1000);
                     }
                 }, 2000);
                 
@@ -123,8 +159,6 @@ function flip(event) {
     
 }
     
-
-
 let firstCardId;
 let firstCardName;
 let secondCardId;
@@ -136,5 +170,15 @@ function handler(e) {
     e.stopPropagation();
     e.preventDefault();
 };
+
+function startGame(event){
+    document.querySelector(".oak").classList.add("fadeOut");
+    setTimeout(() => {
+        document.querySelector(".oak").classList.add("hide");    
+        document.querySelector(".box__container").classList.remove("hide");    
+    }, 900);
+}
+
+document.querySelector(".start").addEventListener("click",startGame);
 
 window.onload = getPokemons();

@@ -17,6 +17,7 @@ body {
   box-sizing: border-box;
   -webkit-animation: fadeIn 2s;
           animation: fadeIn 2s;
+  overflow: hidden;
 }
 
 header {
@@ -77,7 +78,9 @@ main {
   align-items: center;
   align-content: center;
   gap: 15px;
-  transition-delay: 1s;
+  opacity: 1;
+  -webkit-animation: fadeIn 2s linear;
+          animation: fadeIn 2s linear;
 }
 .box__container--scene {
   width: 75px;
@@ -148,4 +151,128 @@ main {
 
 .box__container--card.is-flipped {
   transform: rotateY(180deg);
+}
+
+.oak {
+  width: 50%;
+  height: 25%;
+  max-height: 300px;
+  max-width: 300px;
+  background-image: url("/assets/images/oak.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 20px 40px -12px 0;
+  opacity: 1;
+  -webkit-animation: fadeIn 2s linear;
+          animation: fadeIn 2s linear;
+}
+.oak--text {
+  width: 200px;
+  height: 160px;
+  background-color: white;
+  font-size: 10px;
+  color: rgb(46, 46, 46);
+  padding: 10px 20px 20px 20px;
+  border-radius: 20px;
+  position: relative;
+  bottom: 65%;
+  right: 50%;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeOut {
+  100% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 1;
+  }
+}
+.fadeOut {
+  -webkit-animation: fadeOut 1s linear;
+          animation: fadeOut 1s linear;
+}
+
+.fadeIn {
+  -webkit-animation: fadeIn 1s linear;
+          animation: fadeIn 1s linear;
+}
+
+.hide {
+  display: none;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+.start {
+  font-size: 15px;
+  font-weight: bold;
+  color: red;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ash {
+  width: 50%;
+  height: 25%;
+  max-height: 300px;
+  max-width: 300px;
+  background-image: url("/assets/images/ash3.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 20px 40px -12px 0;
+}
+.ash--text {
+  width: 200px;
+  height: 160px;
+  background-color: white;
+  font-size: 10px;
+  color: rgb(46, 46, 46);
+  padding: 10px 20px 20px 20px;
+  border-radius: 20px;
+  position: relative;
+  bottom: 65%;
+  right: 50%;
+}
+
+.reset {
+  font-size: 15px;
+  font-weight: bold;
+  color: red;
+  text-align: center;
+  cursor: pointer;
 }/*# sourceMappingURL=pokememory.css.map */
