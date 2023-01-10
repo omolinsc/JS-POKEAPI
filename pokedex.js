@@ -13,7 +13,6 @@ async function getPokemons() {
         .then(res => res.json());
     }
     const fetchResult  = await allPokemons();
-    // console.log(fetchResult);
 
     // usamos un FOR para mapear cada pokemon individualmente
     for (let i = 0; i < fetchResult.results.length; i++){
@@ -23,7 +22,6 @@ async function getPokemons() {
         }
        
         const fetchPokemon  = await onePokemon();
-        // console.log(fetchPokemon);
 
         async function legendaryPokemons() {
             return fetch(fetchPokemon.species.url)
@@ -38,7 +36,6 @@ async function getPokemons() {
         // llamamos a la función para crear la carta individual de cada pokemon
         renderPokemons(fetchPokemon);
     }        
-    console.log(legendOrMyth);
 };
 
 //! función para crear las cartas y meterlas en el HTML dinámicamente
@@ -101,7 +98,6 @@ async function getStats (event){
 
 //! creamos una vista con estadísticas para el pokemon que le hacemos click
 async function renderPokemonStats(pokemon){
-    // console.log(pokemon)
 
     // carta global
     const bigCard$$ = document.createElement("div");
@@ -118,18 +114,27 @@ async function renderPokemonStats(pokemon){
     
     const description$$ = document.createElement("p");
 
-    // leemos la descripción del pokemon para ponerla en la carta
+    // leemos la descripción del pokemon para ponerla en la carta (elegimos las que están en inglés)
+
+    let selected = [];
+
     async function descriptionPokemons() {
         return fetch("https://pokeapi.co/api/v2/pokemon-species/" + pokemon.id)
         .then(res => res.json());
+        
     }
     const description = await descriptionPokemons();
-    console.log(description)
 
-    description$$.textContent = description.flavor_text_entries[0].flavor_text;
+    for( let i = 0; i < description.flavor_text_entries.length; i++){
+        if ( description.flavor_text_entries[i].language.name == "es") {
+            selected = description.flavor_text_entries[i].flavor_text;
+        } 
+    }
+
+    description$$.textContent = selected;
     description$$.setAttribute("class","pokemon--description");
 
-
+    //damos estilos según el tipo del pokemon
         for (let i = 0; i < pokemon.types.length; i++){
             const cardType = document.createElement("p");
             cardType.setAttribute("class", "pokemon--Types--type")
