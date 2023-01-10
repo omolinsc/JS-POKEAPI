@@ -1,12 +1,15 @@
 //! creamos la lista con los pokemosn legendarios desde el 1 hasta el 931
-    const legendary = ["zapdos", "articuno", "moltres", "mewtwo", "mew", "raikou", "entei", "suicune", "lugia", "ho-oh", "regirock", "regice", "registeel", "latios", "latias", "kyogre", "groudon", "rayquaza", "rotom", "uxie", "mesprit", "azelf", "palkia", "dialga", "giratina-altered", "jirachi", "deoxys-normal", "cresselia", "darkrai", "arceus", "heatran", "regigigas", "cobalion", "terrakion", "virizion", "tornadus-incarnate", "thundurus-incarnate", "reshiram", "zekrom", "landorus-incarnate", "keldeo", "meloetta-aria", "kyurem", "xerneas", "yveltal", "zygarde-50", "diancie", "hoopa", "volcanion", "type-null", "silvally", "tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini", "cosmog", "cosmoem", "solgaleo", "lunala", "necrozma", "zacian", "zamazenta", "eternatus", "kubfu", "urshifu-single-strike", "enamorus-incarnate", "regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "giratina-origin", "thundurus-therian", "landorus-therian", "tornadus-therian", "kyurem-black", "kyurem-white"];
+    // const legendary = ["zapdos", "articuno", "moltres", "mewtwo", "mew", "raikou", "entei", "suicune", "lugia", "ho-oh", "regirock", "regice", "registeel", "latios", "latias", "kyogre", "groudon", "rayquaza", "rotom", "uxie", "mesprit", "azelf", "palkia", "dialga", "giratina-altered", "jirachi", "deoxys-normal", "cresselia", "darkrai", "arceus", "heatran", "regigigas", "cobalion", "terrakion", "virizion", "tornadus-incarnate", "thundurus-incarnate", "reshiram", "zekrom", "landorus-incarnate", "keldeo", "meloetta-aria", "kyurem", "xerneas", "yveltal", "zygarde-50", "diancie", "hoopa", "volcanion", "type-null", "silvally", "tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini", "cosmog", "cosmoem", "solgaleo", "lunala", "necrozma", "zacian", "zamazenta", "eternatus", "kubfu", "urshifu-single-strike", "enamorus-incarnate", "regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "giratina-origin", "thundurus-therian", "landorus-therian", "tornadus-therian", "kyurem-black", "kyurem-white"];
+
+    const legendOrMyth = [];
+    let numberOfPokemons = 931;
 
 //! primero de todo hacemos el FETCH para solicitar la información a la POKEAPI
 async function getPokemons() {
 
-    // hacemos el primer fetch para obtener la lista de los 151 pokemons
+    // hacemos el primer fetch para obtener la lista de los pokemons que queramos
     async function allPokemons() {
-        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=931')
+        return fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=' + numberOfPokemons)
         .then(res => res.json());
     }
     const fetchResult  = await allPokemons();
@@ -22,9 +25,20 @@ async function getPokemons() {
         const fetchPokemon  = await onePokemon();
         // console.log(fetchPokemon);
 
+        async function legendaryPokemons() {
+            return fetch(fetchPokemon.species.url)
+            .then(res => res.json());
+        }
+    
+        const legendaryPoke = await legendaryPokemons();
+        if (legendaryPoke.is_legendary || legendaryPoke.is_mythical) {
+            legendOrMyth.push(fetchPokemon.name);
+        }        
+
         // llamamos a la función para crear la carta individual de cada pokemon
         renderPokemons(fetchPokemon);
     }        
+    console.log(legendOrMyth);
 };
 
 //! función para crear las cartas y meterlas en el HTML dinámicamente
@@ -68,8 +82,8 @@ function renderPokemons(pokemon) {
     }
 
     // damos estilo diferenciado a los pokemons legendarios
-    for ( let i = 0; i < legendary.length; i++){
-        if (legendary[i] === pokemon.name){
+    for ( let i = 0; i < legendOrMyth.length; i++){
+        if (legendOrMyth[i] === pokemon.name){
             card$$.classList.add("legendary");
         }
     }
@@ -176,8 +190,8 @@ function renderPokemonStats(pokemon){
 
     }
 
-    for ( let i = 0; i < legendary.length; i++){
-        if (legendary[i] === pokemon.name){
+    for ( let i = 0; i < legendOrMyth.length; i++){
+        if (legendOrMyth[i] === pokemon.name){
             cardTop$$.classList.add("legendary");
             cardTop$$.setAttribute("isLegendary","true");
         }
