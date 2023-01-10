@@ -1,8 +1,8 @@
-//! creamos la lista con los pokemosn legendarios desde el 1 hasta el 931
+// ! creamos la lista con los pokemosn legendarios desde el 1 hasta el 931
     // const legendary = ["zapdos", "articuno", "moltres", "mewtwo", "mew", "raikou", "entei", "suicune", "lugia", "ho-oh", "regirock", "regice", "registeel", "latios", "latias", "kyogre", "groudon", "rayquaza", "rotom", "uxie", "mesprit", "azelf", "palkia", "dialga", "giratina-altered", "jirachi", "deoxys-normal", "cresselia", "darkrai", "arceus", "heatran", "regigigas", "cobalion", "terrakion", "virizion", "tornadus-incarnate", "thundurus-incarnate", "reshiram", "zekrom", "landorus-incarnate", "keldeo", "meloetta-aria", "kyurem", "xerneas", "yveltal", "zygarde-50", "diancie", "hoopa", "volcanion", "type-null", "silvally", "tapu-koko", "tapu-lele", "tapu-bulu", "tapu-fini", "cosmog", "cosmoem", "solgaleo", "lunala", "necrozma", "zacian", "zamazenta", "eternatus", "kubfu", "urshifu-single-strike", "enamorus-incarnate", "regieleki", "regidrago", "glastrier", "spectrier", "calyrex", "giratina-origin", "thundurus-therian", "landorus-therian", "tornadus-therian", "kyurem-black", "kyurem-white"];
 
     const legendOrMyth = [];
-    let numberOfPokemons = 931;
+    let numberOfPokemons = 905;
 
 //! primero de todo hacemos el FETCH para solicitar la información a la POKEAPI
 async function getPokemons() {
