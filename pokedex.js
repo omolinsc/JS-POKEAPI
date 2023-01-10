@@ -100,7 +100,7 @@ async function getStats (event){
 };
 
 //! creamos una vista con estadísticas para el pokemon que le hacemos click
-function renderPokemonStats(pokemon){
+async function renderPokemonStats(pokemon){
     // console.log(pokemon)
 
     // carta global
@@ -115,6 +115,20 @@ function renderPokemonStats(pokemon){
         cardName$$.textContent = pokemon.name;
     const cardTypes$$ = document.createElement("div");
         cardTypes$$.setAttribute("class","pokemon--Types");
+    
+    const description$$ = document.createElement("p");
+
+    // leemos la descripción del pokemon para ponerla en la carta
+    async function descriptionPokemons() {
+        return fetch("https://pokeapi.co/api/v2/pokemon-species/" + pokemon.id)
+        .then(res => res.json());
+    }
+    const description = await descriptionPokemons();
+    console.log(description)
+
+    description$$.textContent = description.flavor_text_entries[0].flavor_text;
+    description$$.setAttribute("class","pokemon--description");
+
 
         for (let i = 0; i < pokemon.types.length; i++){
             const cardType = document.createElement("p");
@@ -220,6 +234,7 @@ function renderPokemonStats(pokemon){
             
         bigCard$$.appendChild(cardBottom$$);
             cardBottom$$.appendChild(cardName$$);
+                cardName$$.appendChild(description$$);
                 cardName$$.appendChild(cardTypes$$);
                 cardName$$.appendChild(cardSeparator$$)
             cardBottom$$.appendChild(cardBaseStats$$);
