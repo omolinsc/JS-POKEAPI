@@ -51,35 +51,20 @@ function renderPokemons(pokemon) {
 
     // damos estilos a las cartas según el tipo de pokemon
     for (let i = 0; i < pokemon.types.length; i++){
-        if (pokemon.types[i].type.name === "grass"){card$$.classList.add("grass");}
-        if (pokemon.types[i].type.name === "fire"){card$$.classList.add("fire");}
-        if (pokemon.types[i].type.name === "water"){card$$.classList.add("water");}
-        if (pokemon.types[i].type.name === "bug"){card$$.classList.add("bug");}
-        if (pokemon.types[i].type.name === "normal"){card$$.classList.add("normal");}
-        if (pokemon.types[i].type.name === "poison"){card$$.classList.add("poison");}
-        if (pokemon.types[i].type.name === "electric"){card$$.classList.add("electric");}
-        if (pokemon.types[i].type.name === "ground"){card$$.classList.add("ground");}
-        if (pokemon.types[i].type.name === "fighting"){card$$.classList.add("fighting");}
-        if (pokemon.types[i].type.name === "fairy"){card$$.classList.add("fairy");}
-        if (pokemon.types[i].type.name === "psychic"){card$$.classList.add("psychic");}
-        if (pokemon.types[i].type.name === "rock"){card$$.classList.add("rock");}
-        if (pokemon.types[i].type.name === "ice"){card$$.classList.add("ice");}
-        if (pokemon.types[i].type.name === "dragon"){card$$.classList.add("dragon");}
-        if (pokemon.types[i].type.name === "steel"){card$$.classList.add("steel");}
 
         if (pokemon.types[i].type.name === "flying"){
             const type$$ = document.createElement("div");
             type$$.setAttribute("class","flyingcard");
             card$$.classList.add("class","flying");
             card$$.appendChild(type$$);
-        }
-
-        if (pokemon.types[i].type.name === "ghost"){
+        } else if (pokemon.types[i].type.name === "ghost"){
             const type$$ = document.createElement("div");
             type$$.setAttribute("class","ghostcard");
             card$$.classList.add("class","ghost");
             card$$.appendChild(type$$);
-        }
+        } else { 
+            card$$.classList.add(pokemon.types[i].type.name);
+        }   
     }
 
     // damos estilo diferenciado a los pokemons legendarios
@@ -123,22 +108,13 @@ function renderPokemonStats(pokemon){
             cardType.textContent = pokemon.types[i].type.name;
             cardTypes$$.appendChild(cardType);
 
-            if (pokemon.types[i].type.name === "grass"){cardType.classList.add("grass");}
-            if (pokemon.types[i].type.name === "fire"){cardType.classList.add("fire");}
-            if (pokemon.types[i].type.name === "water"){cardType.classList.add("water");}
-            if (pokemon.types[i].type.name === "bug"){cardType.classList.add("bug");}
-            if (pokemon.types[i].type.name === "normal"){cardType.classList.add("normal");}
-            if (pokemon.types[i].type.name === "poison"){cardType.classList.add("poison");}
-            if (pokemon.types[i].type.name === "electric"){cardType.classList.add("electric");}
-            if (pokemon.types[i].type.name === "ground"){cardType.classList.add("ground");}
-            if (pokemon.types[i].type.name === "fighting"){cardType.classList.add("fighting");}
-            if (pokemon.types[i].type.name === "fairy"){cardType.classList.add("fairy");}
-            if (pokemon.types[i].type.name === "psychic"){cardType.classList.add("psychic");}
-            if (pokemon.types[i].type.name === "rock"){cardType.classList.add("rock");}
-            if (pokemon.types[i].type.name === "ice"){cardType.classList.add("ice");}
-            if (pokemon.types[i].type.name === "dragon"){cardType.classList.add("dragon");}
-            if (pokemon.types[i].type.name === "flying"){cardType.classList.add("flying2");}
-            if (pokemon.types[i].type.name === "ghost"){cardType.classList.add("ghost2");}
+            if (pokemon.types[i].type.name === "flying"){
+                cardType.classList.add("flying2");
+            } else if (pokemon.types[i].type.name === "ghost"){
+                cardType.classList.add("ghost2");
+            } else {
+                cardType.classList.add(pokemon.types[i].type.name);
+            }
 
         }
 
@@ -195,20 +171,9 @@ function renderPokemonStats(pokemon){
     
     // damos estilos según el tipo de pokemon
     for (let i = 0; i < pokemon.types.length; i++){
-        if (pokemon.types[i].type.name === "grass"){cardTop$$.classList.add("grass");}
-        if (pokemon.types[i].type.name === "fire"){cardTop$$.classList.add("fire");}
-        if (pokemon.types[i].type.name === "water"){cardTop$$.classList.add("water");}
-        if (pokemon.types[i].type.name === "bug"){cardTop$$.classList.add("bug");}
-        if (pokemon.types[i].type.name === "normal"){cardTop$$.classList.add("normal");}
-        if (pokemon.types[i].type.name === "poison"){cardTop$$.classList.add("poison");}
-        if (pokemon.types[i].type.name === "electric"){cardTop$$.classList.add("electric");}
-        if (pokemon.types[i].type.name === "ground"){cardTop$$.classList.add("ground");}
-        if (pokemon.types[i].type.name === "fighting"){cardTop$$.classList.add("fighting");}
-        if (pokemon.types[i].type.name === "fairy"){cardTop$$.classList.add("fairy");}
-        if (pokemon.types[i].type.name === "psychic"){cardTop$$.classList.add("psychic");}
-        if (pokemon.types[i].type.name === "rock"){cardTop$$.classList.add("rock");}
-        if (pokemon.types[i].type.name === "ice"){cardTop$$.classList.add("ice");}
-        if (pokemon.types[i].type.name === "dragon"){cardTop$$.classList.add("dragon");}
+
+        cardTop$$.classList.add(pokemon.types[i].type.name);
+
     }
 
     for ( let i = 0; i < legendary.length; i++){
@@ -257,7 +222,6 @@ function renderPokemonStats(pokemon){
     
     cardPokedex$$.addEventListener("click",removeCard);
 }
-
 
 // creamos la función que cierra la ventana de estadísticas del pokemon
 function removeCard(event) {
