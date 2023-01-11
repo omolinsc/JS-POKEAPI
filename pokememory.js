@@ -98,20 +98,20 @@ function memoryPokemons(event){
 //creamos la función FLIP para girar cartas y añadimos el eventListener
 function flip(event) {
 
-    event.path[1].classList.toggle('is-flipped');
+    event.composedPath()[1].classList.toggle('is-flipped');
     // console.log(event)
 
     if (isFlipped === 0){
-        firstCard = event.path[2];
+        firstCard = event.composedPath()[2];
         firstCard.removeEventListener("click",flip);
-        firstCardId = event.path[2].id;
-        firstCardName = event.path[2].attributes[2].nodeValue;
+        firstCardId = event.composedPath()[2].id;
+        firstCardName = event.composedPath()[2].attributes[2].nodeValue;
         isFlipped = 1;
     } else if (isFlipped === 1){
-        secondCard = event.path[2];
+        secondCard = event.composedPath()[2];
         secondCard.removeEventListener("click",flip);
-        secondCardId = event.path[2].id;
-        secondCardName = event.path[2].attributes[2].nodeValue;
+        secondCardId = event.composedPath()[2].id;
+        secondCardName = event.composedPath()[2].attributes[2].nodeValue;
         isFlipped = 0;
         if(firstCardId !== secondCardId && firstCardName === secondCardName){
             console.log("PREMIO");
