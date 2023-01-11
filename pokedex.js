@@ -89,7 +89,7 @@ function renderPokemons(pokemon) {
 //! hacemos FETCH al pokemon clikeado para saber sus estadísticas
 async function getStats (event){
     async function getPokemonStats(event) {
-        return fetch("https://pokeapi.co/api/v2/pokemon/"+ event.path[1].id)
+        return fetch("https://pokeapi.co/api/v2/pokemon/"+ event.composedPath()[1].id)
         .then(res => res.json());
         } 
     const pokemonStats = await getPokemonStats(event);
@@ -259,7 +259,7 @@ async function renderPokemonStats(pokemon){
 
 // creamos la función que cierra la ventana de estadísticas del pokemon
 function removeCard(event) {
-    const removeCard = event.path[3];
+    const removeCard = event.composedPath()[3];
     removeCard.remove();
 }
 
