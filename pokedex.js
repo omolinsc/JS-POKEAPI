@@ -288,4 +288,7 @@ function filter() {
     }
 }
 
+const game = document.querySelector(".game");
+game.setAttribute("onclick","window.open('/memorygame.html','_blank')");
+
 window.onload = getPokemons();
